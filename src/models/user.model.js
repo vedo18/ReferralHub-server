@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const { toJSON, paginate } = require('./plugins');
-const { roles } = require('../config/roles');
-
 const userSchema = mongoose.Schema(
   {
     name: {
@@ -23,6 +21,7 @@ const userSchema = mongoose.Schema(
         }
       },
     },
+
     password: {
       type: String,
       required: true,
@@ -37,12 +36,26 @@ const userSchema = mongoose.Schema(
     },
     role: {
       type: String,
-      enum: roles,
       default: 'user',
     },
     isEmailVerified: {
       type: Boolean,
       default: false,
+    },
+    referral: {
+      type: [
+        {
+          _id: false,
+          id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Referrals',
+          },
+        },
+      ],
+    },
+    resume: {
+      data: Buffer,
+      contentType: String,
     },
   },
   {
