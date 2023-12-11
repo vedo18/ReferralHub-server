@@ -23,6 +23,11 @@ const referralSchema = mongoose.Schema(
       required: true,
       trim: true,
     },
+    location: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     appliedUsers: {
       type: [
         {
@@ -51,7 +56,13 @@ const referralSchema = mongoose.Schema(
     //   data: Buffer,
     //   contentType: String,
     // },
+
+    category: {
+      type: String,
+      required: true,
+    },
   },
+
   {
     timestamps: true,
   }
